@@ -1,0 +1,152 @@
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (main)
+$ git init
+Initialized empty Git repository in C:/ProjetosJava/projeto-spring/.git/
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git config --global user.name "devGiovanni95"
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git config --global user.email "giovanni.DevJava@hotmail.com"
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+        .mvn/
+        mvnw
+        mvnw.cmd
+        pom.xml
+        src/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git add .
+warning: LF will be replaced by CRLF in .gitignore.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in .mvn/wrapper/MavenWrapperDownloader.java.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in .mvn/wrapper/maven-wrapper.properties.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in mvnw.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in mvnw.cmd.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in pom.xml.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/main/java/br/com/projetospring/ProjetoSpringApplication.java.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/main/resources/application.properties.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/test/java/br/com/projetospring/ProjetoSpringApplicationTests.java.
+The file will have its original line endings in your working directory
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git add .
+warning: LF will be replaced by CRLF in .gitignore.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in .mvn/wrapper/MavenWrapperDownloader.java.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in .mvn/wrapper/maven-wrapper.properties.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in mvnw.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in mvnw.cmd.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in pom.xml.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/main/java/br/com/projetospring/ProjetoSpringApplication.java.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in src/test/java/br/com/projetospring/ProjetoSpringApplicationTests.java.
+The file will have its original line endings in your working directory
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   .gitignore
+        new file:   .mvn/wrapper/MavenWrapperDownloader.java
+        new file:   .mvn/wrapper/maven-wrapper.jar
+        new file:   .mvn/wrapper/maven-wrapper.properties
+        new file:   mvnw
+        new file:   mvnw.cmd
+        new file:   pom.xml
+        new file:   src/main/java/br/com/projetospring/ProjetoSpringApplication.java
+        new file:   src/main/resources/application.properties
+        new file:   src/test/java/br/com/projetospring/ProjetoSpringApplicationTests.java
+
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git commit -m "Projeto Criado"
+[master (root-commit) 96b1e9d] Projeto Criado
+ 10 files changed, 712 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 .mvn/wrapper/MavenWrapperDownloader.java
+ create mode 100644 .mvn/wrapper/maven-wrapper.jar
+ create mode 100644 .mvn/wrapper/maven-wrapper.properties
+ create mode 100644 mvnw
+ create mode 100644 mvnw.cmd
+ create mode 100644 pom.xml
+ create mode 100644 src/main/java/br/com/projetospring/ProjetoSpringApplication.java
+ create mode 100644 src/main/resources/application.properties
+ create mode 100644 src/test/java/br/com/projetospring/ProjetoSpringApplicationTests.java
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git log
+commit 96b1e9d12c500bc6a21ea23de42e8ccf854382b2 (HEAD -> master)
+Author: devGiovanni95 <giovanni.DevJava@hotmail.com>
+Date:   Sun Jul 25 18:59:59 2021 -0300
+
+    Projeto Criado
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git remote add origin https://github.com/devGiovanni95/projeto-spring. git
+usage: git remote add [<options>] <name> <url>
+
+    -f, --fetch           fetch the remote branches
+    --tags                import all tags and associated objects when fetching
+                          or do not fetch any tag at all (--no-tags)
+    -t, --track <branch>  branch(es) to track
+    -m, --master <branch>
+                          master branch
+    --mirror[=(push|fetch)]
+                          set up remote as a mirror to push to or fetch from
+
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git remote add origin https://github.com/devGiovanni95/projeto-spring.git
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git push -u origin main
+error: src refspec main does not match any
+error: failed to push some refs to 'https://github.com/devGiovanni95/projeto-spring.git'
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ git push -u origin master
+Enumerating objects: 26, done.
+Counting objects: 100% (26/26), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (17/17), done.
+Writing objects: 100% (26/26), 52.40 KiB | 5.82 MiB/s, done.
+Total 26 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/devGiovanni95/projeto-spring.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ ^C
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
+$ ^C
+
+geu_p@DESKTOP-FR14KF2 MINGW64 /c/ProjetosJava/projeto-spring (master)
