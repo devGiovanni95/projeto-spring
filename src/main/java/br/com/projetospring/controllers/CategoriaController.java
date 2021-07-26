@@ -1,6 +1,6 @@
 package br.com.projetospring.controllers;
 
-import br.com.projetospring.domain.Categoria;
+import br.com.projetospring.entities.Categoria;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

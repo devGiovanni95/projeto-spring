@@ -1,13 +1,22 @@
-package br.com.projetospring.domain;
+package br.com.projetospring.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Categoria {
+@Entity
+public class Categoria implements Serializable {
+    private static final long serialVersionUID = 1L;
 
+    @Id//chave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//geracao de chave automatica
     private Integer id;
     private String nome;
 
-    public Categoria(){
+    public Categoria() {
 
     }
 
