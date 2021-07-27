@@ -1,5 +1,7 @@
 package br.com.projetospring.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class Categoria implements Serializable {
     private Integer id;
     private String nome;
 
+    @JsonManagedReference//no lado que voce quer que venhas os objetos serializados
     @ManyToMany(mappedBy = "categorias")//categorias e o nome da colecao de lista de categorias instanciada na classe produtos
     private List<Produto> produtos = new ArrayList<>();//iniciando a colecao-criando uma lista de produtos em categoria
 

@@ -1,5 +1,7 @@
 package br.com.projetospring.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class Produto implements Serializable {
 
     private Double preco;
 
+    @JsonBackReference//vai omitir listas de categorias para cada produto- para nao dar aquele erro aterior e fazer varias chamadas
     @ManyToMany//mapeando a chave estrangeira e o relacionamento entre tabelas atraves de uma criação de uma tabela intermediaria
     @JoinTable(name = "Produto_Categoria",
     joinColumns =  @JoinColumn(name = "produto_id"),
