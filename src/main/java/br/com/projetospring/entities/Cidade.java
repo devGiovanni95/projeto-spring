@@ -1,5 +1,7 @@
 package br.com.projetospring.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,6 +15,7 @@ public class Cidade implements Serializable {
     private Integer id;
     private String nome;
 
+    @JsonManagedReference/*A cidade pose sereializar o estado sem problema */
     @ManyToOne
     @JoinColumn(name = "estado_id")
     private Estado estado;

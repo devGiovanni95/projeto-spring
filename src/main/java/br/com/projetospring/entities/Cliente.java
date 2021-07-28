@@ -1,6 +1,7 @@
 package br.com.projetospring.entities;
 
 import br.com.projetospring.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class Cliente implements Serializable {
     private Integer tipo;
 //    private TipoCliente tipo;
 
+    @JsonManagedReference/*A classe cliente pode referenciar com os endereços*/
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 

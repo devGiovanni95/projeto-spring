@@ -1,5 +1,8 @@
 package br.com.projetospring.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,6 +20,7 @@ public class Endereco implements Serializable {
     private String bairro;
     private String cep;
 
+    @JsonBackReference/*A classe endereco nao pode chamar os parametros de cliente*/
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;//um endero tem um cliente
