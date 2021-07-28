@@ -2,12 +2,15 @@ package br.com.projetospring.entities;
 
 import br.com.projetospring.enums.TipoCliente;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
+@Entity
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String email;
@@ -15,11 +18,14 @@ public class Cliente implements Serializable {
     private Integer tipo;
 //    private TipoCliente tipo;
 
+    @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
+    @ElementCollection
+    @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
-    public Cliente(){
+    public Cliente() {
 
     }
 
@@ -64,7 +70,7 @@ public class Cliente implements Serializable {
         this.cpfOuCnpj = cpfOuCnpj;
     }
 
-//    public TipoCliente getTipo() {
+    //    public TipoCliente getTipo() {
 //        return tipo;
 //    }
 //
