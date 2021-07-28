@@ -1,13 +1,8 @@
 package br.com.projetospring;
 
-import br.com.projetospring.entities.Categoria;
-import br.com.projetospring.entities.Cidade;
-import br.com.projetospring.entities.Estado;
-import br.com.projetospring.entities.Produto;
-import br.com.projetospring.repositories.CategoriaRepository;
-import br.com.projetospring.repositories.CidadeRepository;
-import br.com.projetospring.repositories.EstadoRepository;
-import br.com.projetospring.repositories.ProdutoRepository;
+import br.com.projetospring.entities.*;
+import br.com.projetospring.enums.TipoCliente;
+import br.com.projetospring.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,15 +16,16 @@ public class ProjetoSpringApplication implements CommandLineRunner {
 	//Para salvar precisamos chamar a classe para salvar
 	@Autowired
 	private CategoriaRepository categoriaRepository;
-
 	@Autowired
 	private ProdutoRepository produtoRepository;
-
 	@Autowired
 	private CidadeRepository cidadeRepository;
-
 	@Autowired
 	private EstadoRepository estadoRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoSpringApplication.class, args);
@@ -66,6 +62,19 @@ public class ProjetoSpringApplication implements CommandLineRunner {
 
 		estadoRepository.saveAll(Arrays.asList(estado1, estado2));
 		cidadeRepository.saveAll(Arrays.asList(cidade1, cidade2, cidade3));
+
+		Cliente cliente1 = new Cliente(null, "Maria Silva","maria@gmail.com","36378912377", TipoCliente.PESSOAFISICA);
+
+		cliente1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+
+		Endereco endereco1 = new Endereco(null, "Rua Flores","300", "Apto 303","Jardim", "38220834", cliente1, cidade1);
+		Endereco endereco2 = new Endereco(null, "Avenida Matos ","105", "Sala 800","Centro", "38777012", cliente1, cidade1);
+
+		cliente1.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
+
+		/*Salvar primeiro o cliente que e independente do endereço*/
+		clienteRepository.saveAll(Arrays.asList(cliente1));
+		enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2));
 
 
 	}
