@@ -1,15 +1,21 @@
 package br.com.projetospring.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Date instante;
 
+    @OneToOne(cascade =  CascadeType.ALL, mappedBy = "pedido")/*Para evitar erro na hora de salvar de entidade transiente*/
     private Pagamento pagamento;
+
     private Cliente cliente;
 
     /*como a relacao de pedido e unidirecional
