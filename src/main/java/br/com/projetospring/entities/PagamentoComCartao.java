@@ -2,12 +2,18 @@ package br.com.projetospring.entities;
 
 import br.com.projetospring.enums.EstadoPagamento;
 
-import java.util.Date;
+import javax.persistence.Entity;
 
+@Entity
 public class PagamentoComCartao extends Pagamento{
     private static final long serialVersionUID = 1L;
 
     private Integer numeroDeParcelas;
+
+    /*Tinha esquecido de criar o construtor default*/
+    public PagamentoComCartao(){
+
+    }
 
     public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas) {
         super(id, estado, pedido);

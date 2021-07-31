@@ -10,6 +10,7 @@ import java.util.*;
 @Entity
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -28,6 +29,7 @@ public class Cliente implements Serializable {
     private Set<String> telefones = new HashSet<>();
 
     /*Criando uma refencia de cliente com um pedido*/
+    @OneToMany(mappedBy = "cliente")/*Mapeado por*/
     private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {
@@ -35,6 +37,7 @@ public class Cliente implements Serializable {
     }
 
     public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
+        super();
         this.id = id;
         this.nome = nome;
         this.email = email;

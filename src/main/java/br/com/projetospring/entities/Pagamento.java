@@ -4,14 +4,17 @@ import br.com.projetospring.enums.EstadoPagamento;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
-public class Pagamento implements Serializable {
+@Inheritance(strategy = InheritanceType.JOINED)
+/*Colocamos a classe como abstrata para que so consiguemes usar as subclasses */
+public abstract class Pagamento implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id/*Nao colocamos para gerar id automaticamente pois precisamos gerar o mesmo id do pedido*/
     private Integer id;
-    private EstadoPagamento estado;
+    private Integer estado;
 
     @OneToOne
     @JoinColumn(name = "pedido_id")
@@ -23,8 +26,9 @@ public class Pagamento implements Serializable {
     }
 
     public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
+        super();
         this.id = id;
-        this.estado = estado;
+        this.estado = estado.getCod();
         this.pedido = pedido;
     }
 
@@ -37,11 +41,11 @@ public class Pagamento implements Serializable {
     }
 
     public EstadoPagamento getEstado() {
-        return estado;
+        return EstadoPagamento.toEnum(estado);
     }
 
     public void setEstado(EstadoPagamento estado) {
-        this.estado = estado;
+        this.estado = estado.getCod();
     }
 
     public Pedido getPedido() {
@@ -50,5 +54,18 @@ public class Pagamento implements Serializable {
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pagamento)) return false;
+        Pagamento pagamento = (Pagamento) o;
+        return Objects.equals(getId(), pagamento.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
