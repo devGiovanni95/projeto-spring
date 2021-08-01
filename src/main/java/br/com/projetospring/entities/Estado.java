@@ -1,6 +1,7 @@
 package br.com.projetospring.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,7 +18,8 @@ public class Estado implements Serializable {
     private Integer id;
     private String nome;
 
-    @JsonBackReference/*Nao pose serializar as cidade para nao causar erro silico*/
+//    @JsonBackReference/*Nao pose serializar as cidade para nao causar erro silico*/
+    @JsonIgnore
     @OneToMany(mappedBy = "estado")//intancia de estado criada na outra tabela
     private List<Cidade> cidades = new ArrayList<>();
 

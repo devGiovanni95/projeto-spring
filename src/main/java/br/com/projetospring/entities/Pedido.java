@@ -1,7 +1,7 @@
 package br.com.projetospring.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,13 +22,13 @@ public class Pedido implements Serializable {
     private Date instante;
 
     /*Agora vamos permitir que a classe pedido serialize para exibir os pagamentos quando a classe chamar e nao permitir que a classe pagamento chame a classe pedido*/
-    @JsonManagedReference
+//    @JsonManagedReference
     @OneToOne(cascade =  CascadeType.ALL, mappedBy = "pedido")/*Para evitar erro na hora de salvar de entidade transiente*/
     private Pagamento pagamento;
 
 
     /*vamos serializar para que nao haja relacao sicicla onde permitiremos que o pedido mostre o cliente mas nao permitiremos que o cliente mostre o cliente*/
-    @JsonManagedReference
+//    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
