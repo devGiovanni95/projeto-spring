@@ -20,4 +20,9 @@ public class CategoriaService {
                 "Object not found! Id: " + id + ", Tipo: " + Categoria.class.getName()
         ));
     }
+
+    public Categoria insert(Categoria obj){
+        obj.setId(null);/*Setando para que garanta que esta criandop um objeto novo e que nao esta atualizando um dado*/
+        return categoriaRepository.save(obj);
+    }
 }
