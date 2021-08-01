@@ -14,7 +14,7 @@ public class PedidoService {
     @Autowired//serve para intanciar automaticamente pela jpa
     private PedidoRepository pedidoRepository;
 
-    public Pedido busca(Integer id){
+    public Pedido find(Integer id){
         Optional <Pedido> obj = pedidoRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Object not found! Id: " + id + ", Tipo: " + Pedido.class.getName()

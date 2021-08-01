@@ -18,8 +18,8 @@ public class CategoriaController {
 
     @GetMapping
     @RequestMapping(value = "/{id}")
-    public ResponseEntity<?> listar(@PathVariable Integer id) {
-        Categoria obj = categoriaService.busca(id);
+    public ResponseEntity<Categoria> find(@PathVariable Integer id) {
+        Categoria obj = categoriaService.find(id);
         return ResponseEntity.ok().body(obj);
     }
 
@@ -34,4 +34,11 @@ public class CategoriaController {
         return ResponseEntity.created(uri).build();
     }
 
+//    @PutMapping/*Com esse mapeamento nao deu certo tive que passar direto no metodo requestMappiing*/
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
+        obj.setId(id);/*Garantia de que vai chamar o id correto*/
+        obj = categoriaService.update(obj);
+        return ResponseEntity.noContent().build();
+    }
 }

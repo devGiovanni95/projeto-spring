@@ -14,7 +14,7 @@ public class ClienteService {
     @Autowired//serve para intanciar automaticamente pela jpa
     private ClienteRepository clienteRepository;
 
-    public Cliente busca(Integer id){
+    public Cliente find(Integer id){
         Optional <Cliente> obj = clienteRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Object not found! Id: " + id + ", Tipo: " + Cliente.class.getName()
