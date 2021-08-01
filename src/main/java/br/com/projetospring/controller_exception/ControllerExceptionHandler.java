@@ -1,5 +1,6 @@
 package br.com.projetospring.controller_exception;
 
+import br.com.projetospring.exceptions.DataIntegrityException;
 import br.com.projetospring.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,14 @@ public class ControllerExceptionHandler {
 
         StandartError error = new StandartError(HttpStatus.NOT_FOUND.value(), e.getMessage(),System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+
+   @ExceptionHandler({DataIntegrityException.class})
+    public ResponseEntity<StandartError> dataIntegrity(DataIntegrityException e, HttpServletRequest request){
+
+        StandartError error = new StandartError(HttpStatus.BAD_REQUEST.value(), e.getMessage(),System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
 }
