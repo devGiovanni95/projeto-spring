@@ -65,8 +65,8 @@ public class CategoriaController {
 //        return ResponseEntity.created(uri).build();
 //    }
 
-//    @PostMapping
-    @RequestMapping(method=RequestMethod.POST)
+    @PostMapping
+    @RequestMapping/*(method=RequestMethod.POST)*/
     public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto){
         Categoria obj = categoriaService.fromDTO(objDto);
         obj = categoriaService.insert(obj);
@@ -79,7 +79,8 @@ public class CategoriaController {
 
 //    @PutMapping/*Com esse mapeamento nao deu certo tive que passar direto no metodo requestMappiing*/
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
+    public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id){
+        Categoria obj = categoriaService.fromDTO(objDto);
         obj.setId(id);/*Garantia de que vai chamar o id correto*/
         obj = categoriaService.update(obj);
         return ResponseEntity.noContent().build();
