@@ -1,6 +1,7 @@
 package br.com.projetospring.entities;
 
 import br.com.projetospring.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+    @JsonBackReference/*Para nao permitir que a classe cliente serialize e mostre os pedidos*/
     /*Criando uma refencia de cliente com um pedido*/
     @OneToMany(mappedBy = "cliente")/*Mapeado por*/
     private List<Pedido> pedidos = new ArrayList<>();

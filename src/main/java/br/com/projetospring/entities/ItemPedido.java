@@ -1,5 +1,7 @@
 package br.com.projetospring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.util.Objects;
@@ -8,6 +10,8 @@ import java.util.Objects;
 public class ItemPedido  {
     private static final long serialVersionUID = 1L;
 
+    /*Para que ignore essa classe e ela nao seja serializada pelas outras e tenha uma relacao sicicla*/
+    @JsonIgnore
     @EmbeddedId
     /*Id do itemPedidoPk e uma chave composta */
     private ItemPedidoPK id = new ItemPedidoPK();
@@ -35,6 +39,8 @@ public class ItemPedido  {
         this.preco = preco;
     }
 
+    /*Para que nao haja relacao sicicla iremos ignorar o metodo getPedido*/
+    @JsonIgnore
     public Pedido getPedido(){
         return id.getPedido();
     }

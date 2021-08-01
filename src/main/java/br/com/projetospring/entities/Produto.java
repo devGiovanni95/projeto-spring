@@ -1,6 +1,7 @@
 package br.com.projetospring.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,7 +27,8 @@ public class Produto implements Serializable {
     )
     private List<Categoria> categorias = new ArrayList<>();//iniciando a colecao-criando uma lista de categoria em produtos
 
-
+    /*Nao precisamos acessar itens do pedido atraves da classe produto*/
+    @JsonIgnore
     /*Set para nao ter itens repetidos*/
     @OneToMany(mappedBy = "id.pedido")
     private Set<ItemPedido> itens = new HashSet<>();
@@ -41,6 +43,8 @@ public class Produto implements Serializable {
         this.preco = preco;
     }
 
+    /*Tudo que comeca com GET e automaticamente serializado por isso teremos que fazer o Hibernate ignorar essa chamada */
+    @JsonIgnore
     public List<Pedido> getPedidos(){
         List<Pedido> lista = new ArrayList<>();
         for (ItemPedido x : itens){

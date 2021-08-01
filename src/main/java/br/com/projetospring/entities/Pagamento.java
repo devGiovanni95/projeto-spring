@@ -1,6 +1,7 @@
 package br.com.projetospring.entities;
 
 import br.com.projetospring.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ public abstract class Pagamento implements Serializable {
     private Integer id;
     private Integer estado;
 
+    @JsonBackReference/*Nao permitir que a classe Pagamento chame a classe pedido para que nao haja relacao sicicla */
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId/*Garantir que seja o mesmo id*/
