@@ -1,5 +1,6 @@
 package br.com.projetospring.services;
 
+import br.com.projetospring.dto.CategoriaDTO;
 import br.com.projetospring.entities.Categoria;
 import br.com.projetospring.exceptions.DataIntegrityException;
 import br.com.projetospring.exceptions.ObjectNotFoundException;
@@ -55,4 +56,7 @@ public class CategoriaService {
         return categoriaRepository.findAll(pageRequest);
     }
 
+    public Categoria fromDTO(CategoriaDTO objDto){
+        return new Categoria(objDto.getId(), objDto.getNome());
+    }
 }
