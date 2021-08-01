@@ -1,10 +1,14 @@
 package br.com.projetospring.entities;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import java.util.Objects;
 
+@Entity
 public class ItemPedido  {
     private static final long serialVersionUID = 1L;
 
+    @EmbeddedId
     /*Id do itemPedidoPk e uma chave composta */
     private ItemPedidoPK id = new ItemPedidoPK();
 

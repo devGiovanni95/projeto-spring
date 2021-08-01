@@ -28,6 +28,7 @@ public class Produto implements Serializable {
 
 
     /*Set para nao ter itens repetidos*/
+    @OneToMany(mappedBy = "id.pedido")
     private Set<ItemPedido> itens = new HashSet<>();
 
     public Produto(){
