@@ -4,6 +4,7 @@ import br.com.projetospring.dto.CategoriaDTO;
 import br.com.projetospring.entities.Categoria;
 import br.com.projetospring.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,6 +28,23 @@ public class CategoriaController {
         return ResponseEntity.ok().body(listDto);
     }
 
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public ResponseEntity<Page<CategoriaDTO>> findPage(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "24")Integer linesPerPage,
+            @RequestParam(value = "orderBy", defaultValue = "nome")String orderBy,
+            @RequestParam(value = "direction", defaultValue = "ASC")String direction
+//            @RequestParam(value = "direction", defaultValue = "DESc")String direction ---alternativa
+    ) {
+        Page<Categoria> list = categoriaService.findPage(page,linesPerPage,orderBy,direction);
+        Page<CategoriaDTO> listDto = list.map(obj -> new CategoriaDTO(obj));
+        return ResponseEntity.ok().body(listDto);
+    }
+
+    /*localhost:8080/categorias/page*/                                      /*pesquisa todos as categorias e mostra numa pagina se o numero for menhor que o padrao estabelecido que é 24*/
+    /*localhost:8080/categorias/page?linesPerPage=3*/                       /*Pesquisa com 3 itens por pagina*/
+    /*localhost:8080/categorias/page?linesPerPage=3&page=1*/                /*Pesquisa 1 segunda pagina pois a pagina inicial e page=0*/
+    /*localhost:8080/categorias/page?linesPerPage=3&page=1&direction=DESC*/ /*Ordena em ordem decrecente */
 
     @GetMapping
     @RequestMapping(value = "/{id}")
