@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -15,6 +16,14 @@ public class CategoriaController {
 
     @Autowired
     private CategoriaService categoriaService;
+
+//    @GetMapping
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity< List<Categoria>> findAll() {
+        List<Categoria> list = categoriaService.findAll();
+        return ResponseEntity.ok().body(list);
+    }
+
 
     @GetMapping
     @RequestMapping(value = "/{id}")
@@ -48,4 +57,5 @@ public class CategoriaController {
         categoriaService.delete(id);
         return ResponseEntity.noContent().build();/*Volta resposta sem conteudo*/
     }
+
 }
