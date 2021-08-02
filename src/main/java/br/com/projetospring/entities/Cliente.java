@@ -23,7 +23,12 @@ public class Cliente implements Serializable {
 //    private TipoCliente tipo;
 
 //    @JsonManagedReference/*A classe cliente pode referenciar com os endereços*/
-    @OneToMany(mappedBy = "cliente")
+//    @OneToMany(mappedBy = "cliente")
+    /*Definindo que quando apagar ele ira apagar os respectivos enderecos tbem
+    so precisamos fazer isso(Quando nao tem um pedido associado pois caso tenha
+     um pedsido associado ele lanca uma excessao automaticamente pois nao foi
+      feita essa autorização no mapeamento de clientes para pedidos )*/
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
