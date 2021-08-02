@@ -2,6 +2,7 @@ package br.com.projetospring.services;
 
 import br.com.projetospring.dto.CategoriaDTO;
 import br.com.projetospring.entities.Categoria;
+import br.com.projetospring.entities.Cliente;
 import br.com.projetospring.exceptions.DataIntegrityException;
 import br.com.projetospring.exceptions.ObjectNotFoundException;
 import br.com.projetospring.repositories.CategoriaRepository;
@@ -34,8 +35,9 @@ public class CategoriaService {
     }
 
     public Categoria update(Categoria obj){
-        find(obj.getId());/*Iremos reaproveitar o metodo criado na categoria find para verificar se id realmente s=existe se nao existir ele lancara uma exceção */
-        return categoriaRepository.save(obj);
+        Categoria newObj = find(obj.getId());
+        updateData(newObj, obj);
+        return categoriaRepository.save(newObj);
     }
 
     public void delete(Integer id){
@@ -59,4 +61,10 @@ public class CategoriaService {
     public Categoria fromDTO(CategoriaDTO objDto){
         return new Categoria(objDto.getId(), objDto.getNome());
     }
+
+    /*Metodo auxiliar para atualizar somente os dois campos disponivel poara atualização*/
+    private void updateData(Categoria newObj, Categoria obj){
+        newObj.setNome(obj.getNome());
+    }
+
 }
