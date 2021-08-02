@@ -32,8 +32,9 @@ public class ClienteService {
 
 
     public Cliente update(Cliente obj){
-        find(obj.getId());/*Iremos reaproveitar o metodo criado na categoria find para verificar se id realmente s=existe se nao existir ele lancara uma exceção */
-        return clienteRepository.save(obj);
+        Cliente newObj = find(obj.getId());
+        updateData(newObj, obj);
+        return clienteRepository.save(newObj);
     }
 
     public void delete(Integer id){
@@ -41,7 +42,7 @@ public class ClienteService {
         try {
             clienteRepository.deleteById(id);
         }catch (DataIntegrityViolationException e){
-            throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
+            throw new DataIntegrityException("Não é possivel excluir porque há entidades relacionadas");
         }
     }
 
@@ -55,6 +56,12 @@ public class ClienteService {
     }
 
     public Cliente fromDTO(ClienteDTO objDto){
-        throw new UnsupportedOperationException();
+        return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null,null);
+    }
+
+    /*Metodo auxiliar para atualizar somente os dois campos disponivel poara atualização*/
+    private void updateData(Cliente newObj, Cliente obj){
+        newObj.setNome(obj.getNome());
+        newObj.setEmail(obj.getEmail());
     }
 }

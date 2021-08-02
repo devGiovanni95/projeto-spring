@@ -46,7 +46,9 @@ public class Cliente implements Serializable {
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.tipo = tipo.getCod();
+        /*Operador ternario*/
+        this.tipo = (tipo==null) ? null : tipo.getCod();/*Se o tipo for igual a nulo atribuir nulo para campo, caso contrario adicione o codigo para ele*/
+//        this.tipo = tipo.getCod();/*Precisamos habilitar a opcao de na hora de atualizar uma informacao a possibilidade de ter o valor null*/
 //        this.tipo = tipo;
     }
 
