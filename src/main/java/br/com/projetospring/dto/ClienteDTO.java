@@ -1,12 +1,14 @@
 package br.com.projetospring.dto;
 
 import br.com.projetospring.entities.Cliente;
+import br.com.projetospring.services.validation.ClienteUpdate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
 
+@ClienteUpdate/*Anotacao que faz verificação do email*/
 public class ClienteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
