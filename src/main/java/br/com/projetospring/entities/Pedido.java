@@ -42,8 +42,9 @@ public class Pedido implements Serializable {
     private Endereco enderecoDeEntrega;
 
 
+    /*Todo troquei os mapeamentos do pedido e do produto*/
     /*Set para nao ter itens repetidos*/
-    @OneToMany(mappedBy = "id.produto")
+    @OneToMany(mappedBy = "id.pedido")
     private Set<ItemPedido> itens = new HashSet<>();
 
     public Pedido(){
@@ -56,6 +57,15 @@ public class Pedido implements Serializable {
 //        this.pagamento = pagamento;
         this.cliente = cliente;
         this.enderecoDeEntrega = enderecoDeEntrega;
+    }
+
+    /*Usa-se o get antes para o spring boot reconhecer e chamar ele quando se iniciar*/
+    public double getValorTotal(){
+        double soma = 0;
+        for (ItemPedido ip: itens){
+            soma = soma +ip.getSubTotal();
+        }
+        return soma;
     }
 
     public Integer getId() {

@@ -30,8 +30,9 @@ public class Produto implements Serializable {
 
     /*Nao precisamos acessar itens do pedido atraves da classe produto*/
     @JsonIgnore
+    /*Todo troquei os mapeamentos do pedido e do produto*/
     /*Set para nao ter itens repetidos*/
-    @OneToMany(mappedBy = "id.pedido")
+    @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedido> itens = new HashSet<>();
 
     public Produto(){

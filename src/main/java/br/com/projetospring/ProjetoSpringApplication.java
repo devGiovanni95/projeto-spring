@@ -70,7 +70,7 @@ public class ProjetoSpringApplication implements CommandLineRunner {
 		categoria6.getProdutos().addAll(Arrays.asList(produto9, produto10));
 		categoria7.getProdutos().addAll(Arrays.asList(produto11));
 
-		produto1.getCategorias().addAll(Arrays.asList(categoria1));
+		produto1.getCategorias().addAll(Arrays.asList(categoria1, categoria4));
 		produto2.getCategorias().addAll(Arrays.asList(categoria1, categoria2, categoria4));
 		produto3.getCategorias().addAll(Arrays.asList(categoria1, categoria4));
 		produto4.getCategorias().addAll(Arrays.asList(categoria2));

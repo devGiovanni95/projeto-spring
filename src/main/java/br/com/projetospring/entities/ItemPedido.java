@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class ItemPedido  {
+public class ItemPedido  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /*Para que ignore essa classe e ela nao seja serializada pelas outras e tenha uma relacao sicicla*/
@@ -39,12 +40,17 @@ public class ItemPedido  {
         this.preco = preco;
     }
 
+    public double getSubTotal(){
+        return (preco - desconto) * quantidade;
+    }
+
     /*Para que nao haja relacao sicicla iremos ignorar o metodo getPedido*/
     @JsonIgnore
     public Pedido getPedido(){
         return id.getPedido();
     }
 
+//    @JsonIgnore
     public Produto getProduto(){
         return id.getProduto();
     }
