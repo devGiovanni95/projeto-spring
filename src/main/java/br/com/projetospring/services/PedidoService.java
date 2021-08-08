@@ -40,6 +40,9 @@ public class PedidoService {
     @Autowired
     private ClienteService clienteService;
 
+    @Autowired
+    private EmailService emailService;
+
 
     public Pedido find(Integer id) {
         Optional<Pedido> obj = pedidoRepository.findById(id);
@@ -67,7 +70,8 @@ public class PedidoService {
             ip.setPedido(obj);
         }
         itemPedidoRepository.saveAll(obj.getItens());
-        System.out.println(obj);//imprimir no console o pedido
+//        System.out.println(obj);//imprimir no console o pedido
+        emailService.sendOrderConfirmationEmail(obj);//precisamos informar que é uma interface e que e um servico do mock
         return obj;
     }
 }
