@@ -71,7 +71,8 @@ public class PedidoService {
         }
         itemPedidoRepository.saveAll(obj.getItens());
 //        System.out.println(obj);//imprimir no console o pedido
-        emailService.sendOrderConfirmationEmail(obj);//precisamos informar que é uma interface e que e um servico do mock
+//        emailService.sendOrderConfirmationEmail(obj);//precisamos informar que é uma interface e que e um servico do mock
+        emailService.sendOrderConfirmationHtmlEmail(obj);//precisamos informar que é uma interface e que e um servico do mock
         return obj;
     }
 }

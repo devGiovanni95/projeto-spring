@@ -75,6 +75,11 @@
 			<version>2.5.2</version>
 		</dependency>
 
+<!--		dependencia para envial email com html-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
