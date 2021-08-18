@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.Date;
 /*Criar o corpo da mensagem e suas definicoes*/
 
-public abstract class AbstractEmailService implements EmailService{
+public abstract class AbstractEmailService implements EmailService {
 
     @Value("${default.sender}")//pegando da classe properties
     private String sender;
@@ -31,42 +31,42 @@ public abstract class AbstractEmailService implements EmailService{
         sendEmail(sm);
     }
 
-     protected SimpleMailMessage prepareSimpleMailMessageFromPedido(Pedido obj){
+    protected SimpleMailMessage prepareSimpleMailMessageFromPedido(Pedido obj) {
         SimpleMailMessage sm = new SimpleMailMessage();
         sm.setTo(obj.getCliente().getEmail());
         sm.setFrom(sender);
         sm.setSubject("Pedido confirmado! Código: " + obj.getId());
         sm.setSentDate(new Date(System.currentTimeMillis()));//pra da a mesma data e hora do servidor
-         sm.setText(obj.toString());
+        sm.setText(obj.toString());
         return sm;
     }
 
-    protected  String htmlFromTemplatePedido(Pedido obj){
+    protected String htmlFromTemplatePedido(Pedido obj) {
         Context context = new Context();
         context.setVariable("pedido", obj);
         return templateEngine.process("email/confirmacaoPedido", context);
     }
 
     @Override
-    public void sendOrderConfirmationHtmlEmail(Pedido obj){
+    public void sendOrderConfirmationHtmlEmail(Pedido obj) {
         /*se a mensagem html nao for enviada enviaremos a normal mesmo*/
         try {
-        MimeMessage mimeMessage = prepareMimeMessageFromPedido(obj);
-        sendHtmlEmail(mimeMessage);
-        }catch (MessagingException e){
+            MimeMessage mimeMessage = prepareMimeMessageFromPedido(obj);
+            sendHtmlEmail(mimeMessage);
+        } catch (MessagingException e) {
             sendOrderConfirmationEmail(obj);
         }
     }
 
-//    /*para ser usado em uma subclasse*/
-    protected  MimeMessage prepareMimeMessageFromPedido(Pedido obj) throws MessagingException {
+    //    /*para ser usado em uma subclasse*/
+    protected MimeMessage prepareMimeMessageFromPedido(Pedido obj) throws MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
         mimeMessageHelper.setTo(obj.getCliente().getEmail());
         mimeMessageHelper.setFrom(sender);
         mimeMessageHelper.setSubject("Pedido confirmado! Código: " + obj.getId());
         mimeMessageHelper.setSentDate(new Date(System.currentTimeMillis()));
-        mimeMessageHelper.setText(htmlFromTemplatePedido(obj),true);
+        mimeMessageHelper.setText(htmlFromTemplatePedido(obj), true);
         return mimeMessage;
     }
 //    protected MimeMessage prepareMimeMessageFromPedido(Pedido obj) throws MessagingException {
