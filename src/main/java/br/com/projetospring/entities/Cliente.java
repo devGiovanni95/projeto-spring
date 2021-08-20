@@ -22,6 +22,9 @@ public class Cliente implements Serializable {
     private Integer tipo;
 //    private TipoCliente tipo;
 
+    @JsonIgnore
+    private String senha;
+
 //    @JsonManagedReference/*A classe cliente pode referenciar com os endereços*/
 //    @OneToMany(mappedBy = "cliente")
     /*Definindo que quando apagar ele ira apagar os respectivos enderecos tbem
@@ -45,7 +48,7 @@ public class Cliente implements Serializable {
 
     }
 
-    public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
+    public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
         super();
         this.id = id;
         this.nome = nome;
@@ -55,6 +58,7 @@ public class Cliente implements Serializable {
         this.tipo = (tipo==null) ? null : tipo.getCod();/*Se o tipo for igual a nulo atribuir nulo para campo, caso contrario adicione o codigo para ele*/
 //        this.tipo = tipo.getCod();/*Precisamos habilitar a opcao de na hora de atualizar uma informacao a possibilidade de ter o valor null*/
 //        this.tipo = tipo;
+        this.senha = senha;
     }
 
     public Integer getId() {
@@ -103,6 +107,14 @@ public class Cliente implements Serializable {
 
     public void setTipo(TipoCliente tipo) {
         this.tipo = tipo.getCod();
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public List<Endereco> getEnderecos() {

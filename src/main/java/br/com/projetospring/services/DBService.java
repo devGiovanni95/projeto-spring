@@ -5,6 +5,7 @@ import br.com.projetospring.enums.EstadoPagamento;
 import br.com.projetospring.enums.TipoCliente;
 import br.com.projetospring.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -33,6 +34,9 @@ public class DBService {
     private PagamentoRepository pagamentoRepository;
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     public void instantiateTestDatabase() throws ParseException {
 
@@ -93,7 +97,7 @@ public class DBService {
         cidadeRepository.saveAll(Arrays.asList(cidade1, cidade2, cidade3));
 
 //        Cliente cliente1 = new Cliente(null, "Maria Silva","simonealmeida1997@gmail.com","36378912377", TipoCliente.PESSOAFISICA);
-        Cliente cliente1 = new Cliente(null, "Maria Silva","TestDevelopmentJava@gmail.com","36378912377", TipoCliente.PESSOAFISICA);
+        Cliente cliente1 = new Cliente(null, "Maria Silva","TestDevelopmentJava@gmail.com","36378912377", TipoCliente.PESSOAFISICA, passwordEncoder.encode("1234"));
 
         cliente1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 
