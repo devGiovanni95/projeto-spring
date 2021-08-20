@@ -1,5 +1,6 @@
 package br.com.projetospring.entities;
 
+import br.com.projetospring.enums.Perfil;
 import br.com.projetospring.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Cliente implements Serializable {
@@ -38,6 +40,14 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+
+
+    @ElementCollection(fetch = FetchType.EAGER)/*Puchar todos os perfils por padrao*/
+    @CollectionTable(name = "PERFIS")
+    private Set<Integer> perfis = new HashSet<>();
+
+
+
 //    @JsonBackReference/*Para nao permitir que a classe cliente serialize e mostre os pedidos*/
     @JsonIgnore
     /*Criando uma refencia de cliente com um pedido*/
@@ -45,7 +55,7 @@ public class Cliente implements Serializable {
     private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {
-
+        addPerfil(Perfil.CLIENTE);/*Para deixar que todos usuario criado seje tenha perfil cliente*/
     }
 
     public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
@@ -59,6 +69,9 @@ public class Cliente implements Serializable {
 //        this.tipo = tipo.getCod();/*Precisamos habilitar a opcao de na hora de atualizar uma informacao a possibilidade de ter o valor null*/
 //        this.tipo = tipo;
         this.senha = senha;
+
+        addPerfil(Perfil.CLIENTE);
+
     }
 
     public Integer getId() {
@@ -116,6 +129,18 @@ public class Cliente implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+
+    public Set<Perfil> getPerfis(){
+        return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+    }
+
+    public void addPerfil(Perfil  perfil){
+        perfis.add(perfil.getCod());
+    }
+
+
+
 
     public List<Endereco> getEnderecos() {
         return enderecos;

@@ -2,6 +2,7 @@ package br.com.projetospring.services;
 
 import br.com.projetospring.entities.*;
 import br.com.projetospring.enums.EstadoPagamento;
+import br.com.projetospring.enums.Perfil;
 import br.com.projetospring.enums.TipoCliente;
 import br.com.projetospring.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,17 +99,22 @@ public class DBService {
 
 //        Cliente cliente1 = new Cliente(null, "Maria Silva","simonealmeida1997@gmail.com","36378912377", TipoCliente.PESSOAFISICA);
         Cliente cliente1 = new Cliente(null, "Maria Silva","TestDevelopmentJava@gmail.com","36378912377", TipoCliente.PESSOAFISICA, passwordEncoder.encode("1234"));
-
         cliente1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+
+        Cliente cliente2 = new Cliente(null, "Giovanni Santos","TestDevelopmentJava@gmail.com","31628382740", TipoCliente.PESSOAFISICA, passwordEncoder.encode("1234"));
+        cliente1.getTelefones().addAll(Arrays.asList("938883321", "93834797"));
+        cliente2.addPerfil(Perfil.ADMIN);
 
         Endereco endereco1 = new Endereco(null, "Rua Flores","300", "Apto 303","Jardim", "38220834", cliente1, cidade1);
         Endereco endereco2 = new Endereco(null, "Avenida Matos ","105", "Sala 800","Centro", "38777012", cliente1, cidade1);
+        Endereco endereco3 = new Endereco(null, "Avenida Presidente Kennedy ","155", null,"Cidade Nova", "2541523", cliente2, cidade2);
 
         cliente1.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
+        cliente2.getEnderecos().addAll(Arrays.asList(endereco3));
 
         /*Salvar primeiro o cliente que e independente do endereço*/
-        clienteRepository.saveAll(Arrays.asList(cliente1));
-        enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2));
+        clienteRepository.saveAll(Arrays.asList(cliente1, cliente2));
+        enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3));
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
