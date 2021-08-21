@@ -20,7 +20,7 @@ public class JWTUtil {
         return Jwts.builder()
                 .setSubject(username)//usuario
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(SignatureAlgorithm.ES512, secret.getBytes())//algoritimo de assinatura de token
+                .signWith(SignatureAlgorithm.HS512, secret.getBytes())//algoritimo de assinatura de token
                 .compact();
     }
 }
