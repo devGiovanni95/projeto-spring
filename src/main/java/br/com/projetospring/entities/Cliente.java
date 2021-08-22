@@ -56,6 +56,16 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")/*Mapeado por*/
     private List<Pedido> pedidos = new ArrayList<>();
 
+    public String imageUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public Cliente() {
         addPerfil(Perfil.CLIENTE);/*Para deixar que todos usuario criado seje tenha perfil cliente*/
     }
