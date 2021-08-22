@@ -6,6 +6,7 @@ import br.com.projetospring.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -21,9 +22,9 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
-//    @GetMapping
+    //    @GetMapping
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity< List<CategoriaDTO>> findAll() {
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
         List<Categoria> list = categoriaService.findAll();
         List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
@@ -32,12 +33,12 @@ public class CategoriaController {
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public ResponseEntity<Page<CategoriaDTO>> findPage(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "linesPerPage", defaultValue = "24")Integer linesPerPage,
-            @RequestParam(value = "orderBy", defaultValue = "nome")String orderBy,
-            @RequestParam(value = "direction", defaultValue = "ASC")String direction
+            @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+            @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+            @RequestParam(value = "direction", defaultValue = "ASC") String direction
 //            @RequestParam(value = "direction", defaultValue = "DESc")String direction ---alternativa
     ) {
-        Page<Categoria> list = categoriaService.findPage(page,linesPerPage,orderBy,direction);
+        Page<Categoria> list = categoriaService.findPage(page, linesPerPage, orderBy, direction);
         Page<CategoriaDTO> listDto = list.map(obj -> new CategoriaDTO(obj));
         return ResponseEntity.ok().body(listDto);
     }
@@ -65,9 +66,10 @@ public class CategoriaController {
 //        return ResponseEntity.created(uri).build();
 //    }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     @RequestMapping/*(method=RequestMethod.POST)*/
-    public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto){
+    public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
         Categoria obj = categoriaService.fromDTO(objDto);
         obj = categoriaService.insert(obj);
         /*Construtor de componentes do Servlet Uri. da solicitação atual ()
@@ -77,16 +79,18 @@ public class CategoriaController {
         return ResponseEntity.created(uri).build();
     }
 
-//    @PutMapping/*Com esse mapeamento nao deu certo tive que passar direto no metodo requestMappiing*/
+    //    @PutMapping/*Com esse mapeamento nao deu certo tive que passar direto no metodo requestMappiing*/
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id){
+    public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
         Categoria obj = categoriaService.fromDTO(objDto);
         obj.setId(id);/*Garantia de que vai chamar o id correto*/
         obj = categoriaService.update(obj);
         return ResponseEntity.noContent().build();
     }
 
-//    @DeleteMapping
+    //    @DeleteMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Categoria> delete(@PathVariable Integer id) {
         categoriaService.delete(id);
