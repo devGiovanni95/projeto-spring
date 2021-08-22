@@ -2,6 +2,7 @@ package br.com.projetospring.services;
 
 import br.com.projetospring.exceptions.FileException;
 import org.apache.commons.io.FilenameUtils;
+import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -50,5 +51,21 @@ public class ImageService {
         }catch (IOException e){
             throw new FileException("Erro ao ler arquivo");
         }
+    }
+
+    //recortar imagem
+    public BufferedImage cropSquare(BufferedImage sourceImg){
+        int min = (sourceImg.getHeight() <= sourceImg.getWidth()) ? sourceImg.getHeight() :  sourceImg.getWidth();
+        return Scalr.crop(//recortar
+                sourceImg,
+                (sourceImg.getWidth()/2)-(min/2),//recortar
+                (sourceImg.getHeight()/2)-(min/2),//recortar
+                min,//tanto que quer recortar na altura
+                min);//e na largura
+    }
+
+    //redimensionar imagem
+    public BufferedImage resize(BufferedImage sourceImg, int size){
+        return Scalr.resize(sourceImg,Scalr.Method.ULTRA_QUALITY,size);
     }
 }
