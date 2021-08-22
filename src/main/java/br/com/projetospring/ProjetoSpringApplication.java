@@ -9,8 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ProjetoSpringApplication implements CommandLineRunner {
 
-    @Autowired
-    private S3Service s3Service;
 
 
     public static void main(String[] args) {
@@ -19,6 +17,5 @@ public class ProjetoSpringApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        s3Service.uploadFile("C:\\ProjetosJava\\recursos aula spring\\imagensPerfil\\4.jpg");
     }
 }
