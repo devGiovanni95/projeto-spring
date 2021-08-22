@@ -1,5 +1,6 @@
 package br.com.projetospring.services;
 
+import br.com.projetospring.exceptions.FileException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ public class S3Service {
             String contentType = multipartFile.getContentType();
             return uploadFile(inputStream, fileName, contentType);
         } catch (IOException ioException) {
-            throw new RuntimeException("Erro de IO: " + ioException.getMessage());
+            throw new FileException("Erro de IO: " + ioException.getMessage());
         }
 
 
@@ -47,7 +48,7 @@ public class S3Service {
             LOG.info("Upload finalizado");
             return s3client.getUrl(bucketName, fileName)/*Retornar a url*/.toURI()/*voltar uma uri*/;
         } catch (URISyntaxException e) {
-            throw new RuntimeException("Erro ao converter URL para URI");
+            throw new FileException("Erro ao converter URL para URI");
         }
     }
 
