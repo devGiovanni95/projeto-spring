@@ -1,5 +1,6 @@
 package br.com.projetospring.controller_exception;
 
+import br.com.projetospring.exceptions.AuthorizationException;
 import br.com.projetospring.exceptions.DataIntegrityException;
 import br.com.projetospring.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,13 @@ public class ControllerExceptionHandler {
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler({AuthorizationException.class})
+    public ResponseEntity<StandartError> authorization(AuthorizationException e, HttpServletRequest request){
+
+        StandartError error = new StandartError(HttpStatus.FORBIDDEN.value(), e.getMessage(),System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
     }
 
 }
