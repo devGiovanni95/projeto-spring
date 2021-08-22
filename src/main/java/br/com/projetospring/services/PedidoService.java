@@ -1,16 +1,15 @@
 package br.com.projetospring.services;
 
-import br.com.projetospring.entities.ItemPedido;
-import br.com.projetospring.entities.PagamentoComBoleto;
-import br.com.projetospring.entities.Pedido;
-import br.com.projetospring.entities.Produto;
+import br.com.projetospring.entities.*;
 import br.com.projetospring.enums.EstadoPagamento;
+import br.com.projetospring.exceptions.AuthorizationException;
 import br.com.projetospring.exceptions.ObjectNotFoundException;
-import br.com.projetospring.repositories.ItemPedidoRepository;
-import br.com.projetospring.repositories.PagamentoRepository;
-import br.com.projetospring.repositories.PedidoRepository;
-import br.com.projetospring.repositories.ProdutoRepository;
+import br.com.projetospring.repositories.*;
+import br.com.projetospring.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -39,6 +38,7 @@ public class PedidoService {
 
     @Autowired
     private ClienteService clienteService;
+
 
     @Autowired
     private EmailService emailService;
@@ -74,5 +74,16 @@ public class PedidoService {
 //        emailService.sendOrderConfirmationEmail(obj);//precisamos informar que é uma interface e que e um servico do mock
         emailService.sendOrderConfirmationHtmlEmail(obj);//precisamos informar que é uma interface e que e um servico do mock
         return obj;
+    }
+
+
+    public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+        UserSS userSS = UserService.authenticated();
+        if (userSS == null){
+            throw new AuthorizationException("Acesso negado!!");
+        }
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        Cliente cliente = clienteService.find(userSS.getId());
+        return pedidoRepository.findByCliente(cliente,pageRequest);
     }
 }
