@@ -1,6 +1,7 @@
 package br.com.projetospring.config;
 
 import br.com.projetospring.security.JWTAuthenticateFilter;
+import br.com.projetospring.security.JWTAuthorizationFilter;
 import br.com.projetospring.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -57,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()/*so permite no metodo get para pegar informacao e nao para alterar as mesmas*/
                 .anyRequest().authenticated();
         http.addFilter(new JWTAuthenticateFilter(authenticationManager(), jwtUtil));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
