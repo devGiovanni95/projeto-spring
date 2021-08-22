@@ -1,5 +1,6 @@
 package br.com.projetospring.services;
 
+import br.com.projetospring.entities.Cliente;
 import br.com.projetospring.entities.Pedido;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -14,6 +15,8 @@ public interface EmailService {
     void sendOrderConfirmationHtmlEmail(Pedido obj);
 
     void sendHtmlEmail(MimeMessage msg);
+
+    void sendNewPasswordEmail(Cliente cliente, String newPass);
 
 
 }
